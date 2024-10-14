@@ -2,6 +2,7 @@
 import useUser from "@/app/auth/hooks/useUser";
 import { Button } from "./ui/button";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Hero() {
   const { data: user } = useUser();
@@ -19,9 +20,13 @@ export default function Hero() {
         </p>
         <div className="flex gap-2 items-center justify-center md:justify-start mt-5">
           {user?.id ? (
-            <Button>Your Dashboard</Button>
+            <Link href="/dashboard">
+              <Button>Your Dashboard</Button>
+            </Link>
           ) : (
-            <Button>Sign Up</Button>
+            <Link href="auth">
+              <Button>Get Started</Button>
+            </Link>
           )}
           <Button variant={"link"}>About Us</Button>
         </div>

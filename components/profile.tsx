@@ -13,18 +13,23 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { supabaseBrowser } from "@/lib/supabase/browser";
 import { useQueryClient } from "@tanstack/react-query";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import { protectedPaths } from "@/lib/constant";
 
 export default function Profile() {
   const { data: user } = useUser();
   const queryClient = useQueryClient();
   const router = useRouter();
+  const pathname = usePathname();
 
   const handleLogOut = async () => {
     const supabase = supabaseBrowser();
     queryClient.clear();
     await supabase.auth.signOut();
     router.refresh();
+    if (protectedPaths.includes(pathname)) {
+      router.replace("/auth?next=" + pathname);
+    }
   };
 
   return (

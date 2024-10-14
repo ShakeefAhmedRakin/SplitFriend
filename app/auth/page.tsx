@@ -1,14 +1,18 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { supabaseBrowser } from "@/lib/supabase/browser";
+import { useSearchParams } from "next/navigation";
 
-export default function page() {
+export default function Page() {
+  const params = useSearchParams();
+  const next = params.get("next") || "";
   const handleLoginWithGoogle = () => {
     const supabase = supabaseBrowser();
-
     supabase.auth.signInWithOAuth({
       provider: "google",
-      options: { redirectTo: "www.facebook.com" },
+      options: {
+        redirectTo: location.origin + "/auth/callback?next=" + next,
+      },
     });
   };
   return (
