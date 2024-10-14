@@ -8,7 +8,7 @@ export default function Hero() {
   const { data: user } = useUser();
 
   return (
-    <div className="flex justify-between items-center gap-8 py-10 md:py-32 flex-col-reverse md:flex-row px-4">
+    <div className="flex justify-between items-center gap-8 py-10 md:py-32 flex-col-reverse md:flex-row">
       {/* CONTENT */}
       <div className="animate-fade">
         <h1 className="text-3xl md:text-5xl font-extrabold max-w-lg text-primary text-center md:text-left">

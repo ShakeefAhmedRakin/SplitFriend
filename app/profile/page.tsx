@@ -1,12 +1,8 @@
 "use client";
 import useUser from "../auth/hooks/useUser";
-import { useEffect, useState } from "react";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import Image from "next/image";
-
-type Profile = Database["public"]["Tables"]["profiles"]["Row"];
 
 export default function MyProfile() {
   const { data: user } = useUser();

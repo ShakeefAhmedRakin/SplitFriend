@@ -9,6 +9,35 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      groups: {
+        Row: {
+          created_at: string
+          created_by: string | null
+          group_name: string
+          id: string
+        }
+        Insert: {
+          created_at?: string
+          created_by?: string | null
+          group_name?: string
+          id?: string
+        }
+        Update: {
+          created_at?: string
+          created_by?: string | null
+          group_name?: string
+          id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "groups_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profiles: {
         Row: {
           created_at: string
