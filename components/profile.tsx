@@ -48,7 +48,11 @@ export default function Profile() {
             <DropdownMenuContent>
               <DropdownMenuLabel>{user.display_name}</DropdownMenuLabel>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>My Profile</DropdownMenuItem>
+              <Link href={"/profile"} className="cursor-pointer">
+                <DropdownMenuItem className="cursor-pointer">
+                  My Profile
+                </DropdownMenuItem>
+              </Link>
               <DropdownMenuSeparator />
               <Button
                 variant={"destructive"}

@@ -40,7 +40,7 @@ export default function RootLayout({
           >
             <main>
               <Navbar></Navbar>
-              <div className="max-w-6xl min-h-screen mx-auto">{children}</div>
+              <div className="max-w-6xl min-h-[60vh] mx-auto">{children}</div>
             </main>
           </ThemeProvider>
         </QueryProvider>
