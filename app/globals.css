@@ -70,6 +70,27 @@ body {
 }
 
 @layer base {
+  ::-webkit-scrollbar {
+    width: 3px; /* Thinner scrollbar */
+    height: 8px; /* Thinner horizontal scrollbar */
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: hsl(
+      var(--primary)
+    ); /* Violet color for the scrollbar thumb */
+    border-radius: 10px; /* Rounded scrollbar */
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: hsl(
+      var(--background)
+    ); /* White background for scrollbar track */
+    border-radius: 10px;
+  }
+}
+
+@layer base {
   * {
     @apply border-border;
   }
