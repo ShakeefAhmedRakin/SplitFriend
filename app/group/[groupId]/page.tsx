@@ -9,11 +9,14 @@ import {
 } from "@/components/ui/card";
 import AddMemberButton from "@/components/addMemberToGroupDialog";
 import GroupMembersGrid from "@/components/groupMembersGrid";
+import AddExpenseToGroup from "@/components/addExpenseToGroup";
+import useUser from "@/app/auth/hooks/useUser";
 
 const GroupDetails = ({ params }) => {
   const [group, setGroup] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const { data: currentUser } = useUser();
 
   useEffect(() => {
     const fetchGroupDetails = async () => {
@@ -67,16 +70,30 @@ const GroupDetails = ({ params }) => {
             {group.group_description || "No description given"}
           </CardDescription>
         </CardHeader>
-
+        {/* MEMBER INFORMATION */}
         <div className="p-4">
           <CardTitle className="items-center gap-2 flex">
-            Members<AddMemberButton group_id={params.groupId}></AddMemberButton>
+            Members{" "}
+            {group.created_by === currentUser.id && (
+              <AddMemberButton group_id={params.groupId}></AddMemberButton>
+            )}
           </CardTitle>
           <hr className="my-4" />
-          <GroupMembersGrid group_id={params.groupId}></GroupMembersGrid>
+          <GroupMembersGrid
+            group_id={params.groupId}
+            created_by={group.created_by}
+          ></GroupMembersGrid>
+        </div>
+        {/* EXPENSES INFORMATION */}
+        <div className="p-4">
+          <CardTitle className="items-center gap-2 flex">
+            Expenses
+            <AddExpenseToGroup groupId={params.groupId}></AddExpenseToGroup>
+          </CardTitle>
+          <hr className="my-4" />
+          22
         </div>
       </Card>
-      {/* GROUP MEMBERS */}
     </div>
   );
 };

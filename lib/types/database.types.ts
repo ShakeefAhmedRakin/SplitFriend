@@ -9,6 +9,58 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      expenses: {
+        Row: {
+          amount: number
+          created_at: string
+          description: string
+          due_to_id: string
+          group_id: string
+          id: string
+          member_id: string
+        }
+        Insert: {
+          amount: number
+          created_at?: string
+          description?: string
+          due_to_id: string
+          group_id: string
+          id?: string
+          member_id: string
+        }
+        Update: {
+          amount?: number
+          created_at?: string
+          description?: string
+          due_to_id?: string
+          group_id?: string
+          id?: string
+          member_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "expenses_due_to_id_fkey"
+            columns: ["due_to_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "expenses_group_id_fkey"
+            columns: ["group_id"]
+            isOneToOne: false
+            referencedRelation: "groups"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "expenses_member_id_fkey"
+            columns: ["member_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       group_members: {
         Row: {
           added_at: string
