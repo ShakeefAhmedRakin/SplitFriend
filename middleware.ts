@@ -57,13 +57,17 @@ export async function middleware(request: NextRequest) {
 
   const { data } = await supabase.auth.getSession();
   const url = new URL(request.url);
+
   if (data.session) {
     if (url.pathname === "/auth") {
       return NextResponse.redirect(new URL("/", request.url));
     }
     return response;
   } else {
-    if (protectedPaths.includes(url.pathname)) {
+    const isProtectedPath = protectedPaths.some((path) =>
+      url.pathname.startsWith(path)
+    );
+    if (isProtectedPath) {
       return NextResponse.redirect(
         new URL("/auth?next=" + url.pathname, request.url)
       );
@@ -73,14 +77,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: [
-    /*
-     * Match all request paths except for the ones starting with:
-     * - _next/static (static files)
-     * - _next/image (image optimization files)
-     * - favicon.ico (favicon file)
-     * Feel free to modify this pattern to include more paths.
-     */
-    "/((?!_next/static|_next/image|favicon.ico).*)",
-  ],
+  matcher: ["/((?!_next/static|_next/image|favicon.ico).*)"],
 };

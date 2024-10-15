@@ -15,6 +15,7 @@ export type Database = {
           created_at: string
           description: string
           due_to_id: string
+          expense_paid_status: boolean | null
           group_id: string
           id: string
           member_id: string
@@ -24,6 +25,7 @@ export type Database = {
           created_at?: string
           description?: string
           due_to_id: string
+          expense_paid_status?: boolean | null
           group_id: string
           id?: string
           member_id: string
@@ -33,6 +35,7 @@ export type Database = {
           created_at?: string
           description?: string
           due_to_id?: string
+          expense_paid_status?: boolean | null
           group_id?: string
           id?: string
           member_id?: string

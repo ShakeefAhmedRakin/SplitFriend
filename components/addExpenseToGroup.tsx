@@ -23,16 +23,20 @@ import {
   SelectContent,
   SelectItem,
   SelectValue,
-} from "@/components/ui/select"; // Adjust the import path as necessary
+} from "@/components/ui/select";
 
-export default function AddExpenseToGroup({ groupId }) {
+export default function AddExpenseToGroup({
+  groupId,
+  refetch,
+  refetchGroupExpenseStatistics,
+}) {
   const [amount, setAmount] = useState("");
   const [description, setDescription] = useState("");
   const [dueToId, setDueToId] = useState("");
   const { data: user } = useUser();
   const { data: groupMembers } = useGroupMembers(groupId);
 
-  const [open, setOpen] = useState(false); // Dialog visibility state
+  const [open, setOpen] = useState(false);
 
   const handleAddExpense = async () => {
     const supabase = supabaseBrowser();
@@ -62,6 +66,8 @@ export default function AddExpenseToGroup({ groupId }) {
       toast.error("Error adding expense: " + error.message);
     } else {
       toast.success(`Expense added successfully!`);
+      refetch();
+      refetchGroupExpenseStatistics();
       setAmount(""); // Reset form fields
       setDescription("");
       setDueToId(""); // Reset due_to_id selection

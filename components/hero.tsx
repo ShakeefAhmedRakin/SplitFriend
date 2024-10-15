@@ -24,11 +24,13 @@ export default function Hero() {
               <Button>Your Dashboard</Button>
             </Link>
           ) : (
-            <Link href="auth">
+            <Link href="/auth">
               <Button>Get Started</Button>
             </Link>
           )}
-          <Button variant={"link"}>About Us</Button>
+          <Link href={"/about"}>
+            <Button variant={"link"}>About Us</Button>
+          </Link>
         </div>
       </div>
       {/* IMAGES */}
