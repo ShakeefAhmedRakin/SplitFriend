@@ -1,36 +1,85 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# SplitFriend
 
-## Getting Started
+**SplitFriend** simplifies group expense management, allowing users to create groups and add team members (without invitations required for logged-in members). Each team member can add expenses, and the dashboard calculates the balance to show who owes whom. It is an effortless bill-splitting solution for groups, perfect for friends, roommates, and teams.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- Create and manage groups for splitting expenses.
+- Add members without needing invitations (signed-up users can be added instantly).
+- Record expenses, and the app automatically calculates the balance.
+- Displays who owes whom, making settling expenses easy and fair.
+- User-friendly interface with a clean and minimal design.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Tech Stack
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Technology      | Description                                                        |
+| --------------- | ------------------------------------------------------------------ |
+| **Next.js**     | Used for building the frontend and routing (App Router).           |
+| **Supabase**    | Backend as a service for managing the database and authentication. |
+| **React Query** | Manages the state and data fetching logic for API calls.           |
+| **ShadCN UI**   | Provides pre-built UI components for a modern and cohesive design. |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Installation and Setup
 
-## Learn More
+### Prerequisites
 
-To learn more about Next.js, take a look at the following resources:
+Ensure you have the following installed on your local machine:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- [Node.js](https://nodejs.org/) (version 16+)
+- [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/) package manager
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Steps to Setup
 
-## Deploy on Vercel
+1. **Clone the repository**
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+   ```bash
+   git clone https://github.com/your-username/splitfriend.git
+   cd splitfriend
+   ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+2. **Install dependencies**
+
+   Using npm:
+
+   ```bash
+   npm install
+   ```
+
+   Or using yarn:
+
+   ```bash
+   yarn install
+   ```
+
+3. **Create the `.env.local` file**
+
+   In the root directory, create a `.env.local` file and add your Supabase credentials:
+
+   ```bash
+   NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+   NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+   ```
+
+4. **Run the development server**
+
+   Once everything is set up, run the development server:
+
+   ```bash
+   npm run dev
+   ```
+
+   Or using yarn:
+
+   ```bash
+   yarn dev
+   ```
+
+   The app will be running on [http://localhost:3000](http://localhost:3000).
+
+5. **Open your browser**
+
+   Open your browser and navigate to [http://localhost:3000](http://localhost:3000) to see the app.
+
+### Credits
+
+- Built using [Next.js](https://nextjs.org/), [Supabase](https://supabase.io/), and [ShadCN UI](https://shadcn.dev/).
