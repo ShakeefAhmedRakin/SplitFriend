@@ -213,7 +213,16 @@ export default function GroupExpensesGrid({
                   Description: {expense.description}
                 </p>
                 <p className="text-xs text-gray-500">
-                  Member: <UserDetail userId={expense.member_id} />
+                  Owed To:{" "}
+                  <span className="text-primary">
+                    <UserDetail userId={expense.due_to_id} />
+                  </span>
+                </p>
+                <p className="text-xs text-gray-500">
+                  Owed by:{" "}
+                  <span className="text-destructive">
+                    <UserDetail userId={expense.member_id} />
+                  </span>
                 </p>
                 <p className="text-xs text-gray-500">
                   Date: {new Date(expense.created_at).toLocaleDateString()}
