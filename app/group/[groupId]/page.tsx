@@ -7,6 +7,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import AddMemberButton from "@/components/addMemberToGroupDialog";
+import GroupMembersGrid from "@/components/groupMembersGrid";
 
 const GroupDetails = ({ params }) => {
   const [group, setGroup] = useState(null);
@@ -56,7 +58,8 @@ const GroupDetails = ({ params }) => {
   }
 
   return (
-    <div className="container mx-auto py-10">
+    <div>
+      {/* GROUP INFORMATION */}
       <Card>
         <CardHeader>
           <CardTitle className="uppercase">{group.group_name}</CardTitle>
@@ -64,7 +67,16 @@ const GroupDetails = ({ params }) => {
             {group.group_description || "No description given"}
           </CardDescription>
         </CardHeader>
+
+        <div className="p-4">
+          <CardTitle className="items-center gap-2 flex">
+            Members<AddMemberButton group_id={params.groupId}></AddMemberButton>
+          </CardTitle>
+          <hr className="my-4" />
+          <GroupMembersGrid group_id={params.groupId}></GroupMembersGrid>
+        </div>
       </Card>
+      {/* GROUP MEMBERS */}
     </div>
   );
 };

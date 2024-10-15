@@ -28,19 +28,46 @@ export default function CreateGroupButton() {
   const handleCreateGroup = async () => {
     const supabase = supabaseBrowser();
 
-    const { data, error } = await supabase.from("groups").insert([
+    // Step 1: Insert the new group
+    const { data: groupData, error: groupError } = await supabase
+      .from("groups")
+      .insert([
+        {
+          group_name: groupName,
+          group_description: groupDescription,
+          created_by: user?.id,
+        },
+      ])
+      .select("*") // Make sure to return all fields
+      .single(); // Get single group data back
+
+    // Check if there was an error
+    if (groupError) {
+      toast.error("Error creating group: " + groupError.message);
+      return; // Exit if there's an error
+    }
+
+    // Check the retrieved group data
+    if (!groupData) {
+      toast.error("No group data returned after creation.");
+      return; // Exit if there's no data
+    }
+
+    console.log("New Group Data:", groupData);
+
+    // Step 2: Insert the group creator into the group_members table
+    const { error: memberError } = await supabase.from("group_members").insert([
       {
-        group_name: groupName,
-        group_description: groupDescription,
-        created_by: user?.id,
+        group_id: groupData.id, // Use the id of the newly created group
+        user_id: user?.id, // Use the current user's id
       },
     ]);
 
-    if (error) {
-      toast.error("Error creating group:", error.message);
+    if (memberError) {
+      toast.error("Error adding you to the group: " + memberError.message);
     } else {
       toast.success(`Group ${groupName} created successfully!`);
-      refetch();
+      refetch(); // Refetch groups to update the list
       setGroupName(""); // Reset form fields
       setGroupDescription("");
       setOpen(false); // Close the dialog
